@@ -451,6 +451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
+  rotateSpeed: 10
 --- !u!1001 &1691882763
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -458,10 +459,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1541593547}
     m_Modifications:
+    - target: {fileID: 1691882766, guid: 1c5dda3c7cd3cf742afcade5419faeab, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1541593548}
     - target: {fileID: 3294758251327466532, guid: 1c5dda3c7cd3cf742afcade5419faeab,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3294758251327466532, guid: 1c5dda3c7cd3cf742afcade5419faeab,
         type: 3}
