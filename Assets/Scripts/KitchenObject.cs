@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class KitchenObject : MonoBehaviour
 {
-    [SerializeField] private KitchenObjectSO _kitchenObjectSO;
+    [SerializeField] private KitchenObjectSO kitchenObjectSO;
 
     private IKitchenObjectParent _kitchenObjectParent;
 
@@ -24,6 +24,11 @@ public class KitchenObject : MonoBehaviour
 
         transform.parent = _kitchenObjectParent.GetKitchenObjectPointTransform();
         transform.localPosition = Vector3.zero;
+    }
+
+    public KitchenObjectSO GetKitchenObjectSO()
+    {
+        return kitchenObjectSO;
     }
 
     public void DestroySelf()
