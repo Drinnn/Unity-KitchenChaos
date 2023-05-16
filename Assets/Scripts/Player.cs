@@ -159,7 +159,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         _kitchenObject = null;
     }
 
-    bool IKitchenObjectParent.HasKitchenObject()
+    public bool HasKitchenObject()
     {
         return _kitchenObject != null;
     }
