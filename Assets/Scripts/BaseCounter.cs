@@ -7,6 +7,11 @@ public abstract class BaseCounter : MonoBehaviour, IKitchenObjectParent
     private KitchenObject _kitchenObject;
     
     public abstract void Interact(Player player);
+
+    public virtual void InteractAlternative(Player player)
+    {
+        
+    }
     
     public Transform GetKitchenObjectPointTransform()
     {
