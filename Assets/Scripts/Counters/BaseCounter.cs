@@ -5,8 +5,11 @@ public abstract class BaseCounter : MonoBehaviour, IKitchenObjectParent
     [SerializeField] private Transform topPoint;
 
     private KitchenObject _kitchenObject;
-    
-    public abstract void Interact(Player player);
+
+    public virtual void Interact(Player player)
+    {
+        
+    }
 
     public virtual void InteractAlternative(Player player)
     {
