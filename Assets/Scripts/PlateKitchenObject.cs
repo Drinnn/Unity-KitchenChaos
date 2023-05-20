@@ -10,7 +10,9 @@ public class PlateKitchenObject : KitchenObject
     {
         public KitchenObjectSO kitchenObjectSO;
     }
-    
+
+    public List<KitchenObjectSO> KitchenObjectSOList => _kitchenObjectSOList;
+
     [SerializeField] private List<KitchenObjectSO> _validKitchenObjectSOList;
     
     private List<KitchenObjectSO> _kitchenObjectSOList;
