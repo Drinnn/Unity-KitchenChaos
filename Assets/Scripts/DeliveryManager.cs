@@ -9,6 +9,9 @@ public class DeliveryManager : MonoBehaviour
     
     public event EventHandler OnRecipeSpawned;
     public event EventHandler OnRecipeCompleted;
+    public event EventHandler OnRecipeSuccess;
+    public event EventHandler OnRecipeFailed;
+
 
     public List<RecipeSO> WaitingRecipesSOList => _waitingRecipesSOList;
     
@@ -52,7 +55,7 @@ public class DeliveryManager : MonoBehaviour
 
             if (waitingRecipeSO.kitchenObjectList.Count == plateKitchenObject.KitchenObjectSOList.Count)
             {
-                bool plateCountentsMatchesRecipe = true;
+                bool plateContentsMatchesRecipe = true;
                 foreach (var recipeKitchenObjectSO in waitingRecipeSO.kitchenObjectList)
                 {
                     bool ingredientFound = false;
@@ -67,21 +70,21 @@ public class DeliveryManager : MonoBehaviour
 
                     if (!ingredientFound)
                     {
-                        plateCountentsMatchesRecipe = false;
+                        plateContentsMatchesRecipe = false;
                     }
                 }
 
-                if (plateCountentsMatchesRecipe)
+                if (plateContentsMatchesRecipe)
                 {
                     _waitingRecipesSOList.RemoveAt(i);
                     
                     OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
-                    
+                    OnRecipeSuccess?.Invoke(this, EventArgs.Empty);
                     return;
                 }
             }
         }
         
-        Debug.Log("No recipe found!");
+        OnRecipeFailed?.Invoke(this, EventArgs.Empty);
     }
 }
