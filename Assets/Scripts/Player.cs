@@ -1,9 +1,10 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IKitchenObjectParent
+public class Player : NetworkBehaviour, IKitchenObjectParent
 {
-    public static Player Instance { get; private set; }
+    // public static Player Instance { get; private set; }
     
     [SerializeField] private float playerRadius = .7f;
     [SerializeField] private float playerHeight = 2f;
@@ -12,8 +13,6 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     [SerializeField] private float interactionDistance = 2f;
     [SerializeField] private LayerMask countersLayerMask;
     [SerializeField] private Transform kitchenObjectHoldPoint;
-
-    [SerializeField] private GameInput gameInput;
 
     public bool IsWalking { get; private set; }
 
@@ -30,17 +29,13 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Debug.LogError("More than one Player detected!");
-        }
-        Instance = this;
+        // Instance = this;
     }
 
     private void Start()
     {
-        gameInput.OnInteraction += GameInput_OnInteraction;
-        gameInput.OnAlternativeInteraction += GameInput_OnAlternativeInteraction;
+        GameInput.Instance.OnInteraction += GameInput_OnInteraction;
+        GameInput.Instance.OnAlternativeInteraction += GameInput_OnAlternativeInteraction;
     }
 
     private void Update()
@@ -51,7 +46,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     
     private Vector3 GetMovementDirection()
     {
-        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+        Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
         
         return new Vector3(inputVector.x, 0f, inputVector.y);
     }
