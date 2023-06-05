@@ -40,11 +40,13 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
 
     private void Update()
     {
-        if (IsOwner)
+        if (!IsOwner)
         {
-            HandleMovement();
-            HandleInteractions();    
+            return;
         }
+        
+        HandleMovement();
+        HandleInteractions();
     }
     
     private Vector3 GetMovementDirection()
