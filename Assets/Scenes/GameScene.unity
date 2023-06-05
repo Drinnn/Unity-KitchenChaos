@@ -6903,7 +6903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f3b4aa6bf23a2e4a8d02d00fec2156c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdownToStartTimer: 3
+  countdownToStartTimer: 1
   gamePlayingTimerMax: 150
 --- !u!4 &1340742446
 Transform:

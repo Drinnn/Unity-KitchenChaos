@@ -17,6 +17,7 @@ public class KitchenGameManager : MonoBehaviour
     public event EventHandler OnGamePaused;
     public event EventHandler OnGameUnpaused;
 
+    // TODO: Remember to change this value back to default (3f) - Multiplayer testing purposes
     [SerializeField] private float countdownToStartTimer = 3f;
     [SerializeField] private float gamePlayingTimerMax = 10f;
 
@@ -35,6 +36,10 @@ public class KitchenGameManager : MonoBehaviour
     {
         GameInput.Instance.OnPauseInteraction += GameInput_OnPauseInteraction;
         GameInput.Instance.OnInteraction += GameInput_OnInteraction;
+        
+        // TODO: Remove this - multiplayer testing purposes 
+        _state = State.CountdownToStart;
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private void Update()
