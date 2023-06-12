@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class ResetStaticDataManager : MonoBehaviour
@@ -8,5 +7,6 @@ public class ResetStaticDataManager : MonoBehaviour
         CuttingCounter.ResetStaticData();
         BaseCounter.ResetStaticData();
         TrashCounter.ResetStaticData();
+        Player.ResetStaticData();
     }
 }

@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Player : NetworkBehaviour, IKitchenObjectParent
 {
-    // public static Player Instance { get; private set; }
-    
+    public static Player LocalInstance { get; private set; }
+
+    public static event EventHandler OnAnyPlayerSpawned; 
+    public static void ResetStaticData()
+    {
+        OnAnyPlayerSpawned = null;
+    }
+
     [SerializeField] private float playerRadius = .7f;
     [SerializeField] private float playerHeight = 2f;
     [SerializeField] private float moveSpeed = 7f;
@@ -27,9 +33,16 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
     private BaseCounter _selectedCounter;
     private KitchenObject _kitchenObject;
 
-    private void Awake()
+    public override void OnNetworkSpawn()
     {
-        // Instance = this;
+        if (IsOwner)
+        {
+            LocalInstance = this;
+        }        
+        
+        OnAnyPlayerSpawned?.Invoke(this, EventArgs.Empty);
+        
+        base.OnNetworkSpawn();
     }
 
     private void Start()
