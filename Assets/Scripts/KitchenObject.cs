@@ -1,6 +1,7 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class KitchenObject : MonoBehaviour
+public class KitchenObject : NetworkBehaviour
 {
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
 
