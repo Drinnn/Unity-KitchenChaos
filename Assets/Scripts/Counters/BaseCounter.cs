@@ -1,4 +1,5 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 
 public abstract class BaseCounter : MonoBehaviour, IKitchenObjectParent
@@ -47,6 +48,11 @@ public abstract class BaseCounter : MonoBehaviour, IKitchenObjectParent
     public bool HasKitchenObject()
     {
         return _kitchenObject != null;
+    }
+
+    public NetworkObject GetNetworkObject()
+    {
+        return null;
     }
     
     public static void ResetStaticData()
