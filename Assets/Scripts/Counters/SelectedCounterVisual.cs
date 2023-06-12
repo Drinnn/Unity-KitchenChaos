@@ -14,7 +14,7 @@ public class SelectedCounterVisual : MonoBehaviour
         }
         else
         {
-            Player.OnAnyPlayerSpawned += Player_OnAnyPlayerSpawned;
+            Player.OnAnySpawned += Player_OnAnyPlayerSpawned;
         }
     }
 

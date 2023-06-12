@@ -28,7 +28,7 @@ public class SoundManager : MonoBehaviour
 
         CuttingCounter.OnAnyCut += CuttingCounter_OnAnyCut;
 
-        // Player.Instance.OnPickedSomething += Player_OnPickedSomething;
+        Player.OnAnyPickedUp += Player_OnAnyPickedUp;
 
         BaseCounter.OnAnyObjectPlacedHere += BaseCounter_OnAnyObjectPlacedHere;
 
@@ -53,9 +53,10 @@ public class SoundManager : MonoBehaviour
         PlaySound(audioClipRefsSO.chop, cuttingCounter.transform.position);
     }
     
-    private void Player_OnPickedSomething(object sender, EventArgs e)
+    private void Player_OnAnyPickedUp(object sender, EventArgs e)
     {
-        // PlaySound(audioClipRefsSO.objectPickup, Player.Instance.transform.position);
+        Player player = sender as Player;
+        PlaySound(audioClipRefsSO.objectPickup, player.transform.position);
     }
     
     private void BaseCounter_OnAnyObjectPlacedHere(object sender, EventArgs e)

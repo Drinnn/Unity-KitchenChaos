@@ -6,10 +6,12 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
 {
     public static Player LocalInstance { get; private set; }
 
-    public static event EventHandler OnAnyPlayerSpawned; 
+    public static event EventHandler OnAnySpawned;
+    public static event EventHandler OnAnyPickedUp;
     public static void ResetStaticData()
     {
-        OnAnyPlayerSpawned = null;
+        OnAnySpawned = null;
+        OnAnyPickedUp = null;
     }
 
     [SerializeField] private float playerRadius = .7f;
@@ -40,7 +42,7 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
             LocalInstance = this;
         }        
         
-        OnAnyPlayerSpawned?.Invoke(this, EventArgs.Empty);
+        OnAnySpawned?.Invoke(this, EventArgs.Empty);
         
         base.OnNetworkSpawn();
     }
@@ -185,6 +187,7 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
         if (kitchenObject != null)
         {
             OnPickedSomething?.Invoke(this, EventArgs.Empty);
+            OnAnyPickedUp?.Invoke(this, EventArgs.Empty);
         }
     }
 
