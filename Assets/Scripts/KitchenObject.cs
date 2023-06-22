@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -6,9 +7,30 @@ public class KitchenObject : NetworkBehaviour
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
 
     private IKitchenObjectParent _kitchenObjectParent;
+    private FollowTransform _followTransform;
+
+    private void Awake()
+    {
+        _followTransform = GetComponent<FollowTransform>();
+    }
 
     public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent)
     {
+        SetKitchenObjectParentServerRpc(kitchenObjectParent.GetNetworkObject());
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SetKitchenObjectParentServerRpc(NetworkObjectReference kitchenObjectParentNetworkObjectReference)
+    {
+        SetKitchenObjectParentClientRpc(kitchenObjectParentNetworkObjectReference);
+    }
+
+    [ClientRpc]
+    private void SetKitchenObjectParentClientRpc(NetworkObjectReference kitchenObjectParentNetworkObjectReference)
+    {
+        kitchenObjectParentNetworkObjectReference.TryGet(out NetworkObject kitchenObjectParentNetworkObject);
+        IKitchenObjectParent kitchenObjectParent = kitchenObjectParentNetworkObject.GetComponent<IKitchenObjectParent>();
+        
         if (_kitchenObjectParent != null)
         {
             _kitchenObjectParent.ClearKitchenObject();
@@ -22,10 +44,9 @@ public class KitchenObject : NetworkBehaviour
         }
 
         _kitchenObjectParent.SetKitchenObject(this);
-
-        // transform.parent = _kitchenObjectParent.GetKitchenObjectPointTransform();
-        // transform.localPosition = Vector3.zero;
-    }
+        
+        _followTransform.SetTargetTransform(kitchenObjectParent.GetKitchenObjectFollowTransform());
+    } 
 
     public KitchenObjectSO GetKitchenObjectSO()
     {
@@ -46,11 +67,9 @@ public class KitchenObject : NetworkBehaviour
             plateKitchenObject = this as PlateKitchenObject;
             return true;
         }
-        else
-        {
-            plateKitchenObject = null;
-            return false;
-        }
+
+        plateKitchenObject = null;
+        return false;
     }
 
     public static void SpawnKitchenObject(KitchenObjectSO kitchenObjectSo, IKitchenObjectParent kitchenObjectParent)

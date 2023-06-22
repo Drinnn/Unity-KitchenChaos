@@ -20,7 +20,7 @@ public abstract class BaseCounter : MonoBehaviour, IKitchenObjectParent
         
     }
     
-    public Transform GetKitchenObjectPointTransform()
+    public Transform GetKitchenObjectFollowTransform()
     {
         return topPoint;
     }

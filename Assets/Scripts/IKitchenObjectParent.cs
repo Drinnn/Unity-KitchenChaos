@@ -3,7 +3,7 @@ using UnityEngine;
 
 public interface IKitchenObjectParent
 {
-    public Transform GetKitchenObjectPointTransform();
+    public Transform GetKitchenObjectFollowTransform();
     public KitchenObject GetKitchenObject();
     public void SetKitchenObject(KitchenObject kitchenObject);
     public void ClearKitchenObject();

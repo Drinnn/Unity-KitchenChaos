@@ -170,7 +170,7 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
         });
     }
 
-    public Transform GetKitchenObjectPointTransform()
+    public Transform GetKitchenObjectFollowTransform()
     {
         return kitchenObjectHoldPoint;
     }
