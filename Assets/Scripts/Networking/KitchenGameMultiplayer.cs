@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -24,6 +23,7 @@ public class KitchenGameMultiplayer : NetworkBehaviour
         KitchenObjectSO kitchenObjectSO = GetKitchenObjectSOFromIndex(kitchenObjectSOIndex);
         
         GameObject kitchenObjectGameObject = Instantiate(kitchenObjectSO.prefab);
+        
         NetworkObject kitchenObjectNetworkObject = kitchenObjectGameObject.GetComponent<NetworkObject>();
         kitchenObjectNetworkObject.Spawn(true);
          

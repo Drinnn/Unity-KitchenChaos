@@ -2,7 +2,7 @@ using System;
 using Unity.Netcode;
 using UnityEngine;
 
-public abstract class BaseCounter : MonoBehaviour, IKitchenObjectParent
+public abstract class BaseCounter : NetworkBehaviour, IKitchenObjectParent
 {
     public static event EventHandler OnAnyObjectPlacedHere;
     
@@ -52,7 +52,7 @@ public abstract class BaseCounter : MonoBehaviour, IKitchenObjectParent
 
     public NetworkObject GetNetworkObject()
     {
-        return null;
+        return NetworkObject;
     }
     
     public static void ResetStaticData()
